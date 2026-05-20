@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="form-card">
+        <h2 class="form-titulo">Formulario de Registro</h2>
+        <p class="form-subtitulo">Complete todos los campos requeridos para registrarse.</p>
+        <hr>
+
+        <form id="formulario-registro" action="#" method="post" onsubmit="return validarFormulario()">
+
+            <!-- CREDENCIALES -->
+            <h5 class="seccion-titulo">Credenciales de acceso</h5>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label" for="username">Nombre de usuario <span class="obligatorio">*</span></label>
+                    <input type="text" class="form-control" id="username" autocomplete="off">
+                    <div class="form-text text-muted">5–10 caracteres, inicia con letra, sin símbolos.</div>
+                    <div class="error-msg" id="username-msg"></div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label" for="password">Contraseña <span class="obligatorio">*</span></label>
+                    <input type="password" class="form-control" id="password" autocomplete="off">
+                    <div class="form-text text-muted">3–6 caracteres, al menos 1 letra y 1 número.</div>
+                    <div class="error-msg" id="password-msg"></div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label" for="re-password">Confirmar contraseña <span class="obligatorio">*</span></label>
+                    <input type="password" class="form-control" id="re-password" autocomplete="off">
+                    <div class="error-msg" id="re-password-msg"></div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- DATOS PERSONALES -->
+            <h5 class="seccion-titulo">Datos personales</h5>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="direccion">Dirección <span class="obligatorio">*</span></label>
+                    <input type="text" class="form-control" id="direccion" placeholder="ej. Av. Independencia 1234">
+                    <div class="error-msg" id="direccion-msg"></div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="comuna">Comuna <span class="obligatorio">*</span></label>
+                    <select class="form-select" id="comuna">
+                        <option value="">— Seleccionar comuna —</option>
+                        <option value="santiago">Santiago</option>
+                        <option value="providencia">Providencia</option>
+                        <option value="nunoa">Ñuñoa</option>
+                        <option value="lascondes">Las Condes</option>
+                        <option value="maipu">Maipú</option>
+                        <option value="pudahuel">Pudahuel</option>
+                        <option value="penalolen">Peñalolén</option>
+                        <option value="quilicura">Quilicura</option>
+                        <option value="lacisterna">La Cisterna</option>
+                        <option value="renca">Renca</option>
+                        <option value="valdivia">Valdivia</option>
+                        <option value="concepcion">Concepción</option>
+                        <option value="temuco">Temuco</option>
+                        <option value="valparaiso">Valparaíso</option>
+                        <option value="vinardelmar">Viña del Mar</option>
+                        <option value="antofagasta">Antofagasta</option>
+                        <option value="iquique">Iquique</option>
+                        <option value="puertomontt">Puerto Montt</option>
+                        <option value="arica">Arica</option>
+                        <option value="laserena">La Serena</option>
+                    </select>
+                    <div class="error-msg" id="comuna-msg"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="telefono">Teléfono <span class="obligatorio">*</span></label>
+                    <input type="text" class="form-control" id="telefono" placeholder="+56912345678">
+                    <div class="form-text text-muted">Formato: +56 seguido de 9 dígitos.</div>
+                    <div class="error-msg" id="telefono-msg"></div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="url">Página web personal</label>
+                    <input type="text" class="form-control" id="url" placeholder="https://mi-sitio.cl">
+                    <div class="form-text text-muted">Opcional. Debe comenzar con http:// o https://</div>
+                    <div class="error-msg" id="url-msg"></div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- AFICIONES -->
+            <h5 class="seccion-titulo">Aficiones <span class="obligatorio">*</span></h5>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="hobby">Agregar afición</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="hobby" placeholder="ej. Fotografía, Ajedrez...">
+                        <button type="button" class="btn btn-secondary" onclick="agregarAficion()">Agregar</button>
+                    </div>
+                    <div class="form-text text-muted">Debes ingresar al menos 2 aficiones.</div>
+                    <div class="error-msg" id="hobby-msg"></div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Aficiones agregadas (<span id="hobby-counter">0</span>)</label>
+                    <ul class="list-group" id="hobby-list">
+                        <li class="list-group-item text-muted fst-italic" id="hobby-placeholder">Aún no has agregado aficiones.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="d-flex gap-2 mt-2">
+                <button type="submit" class="btn btn-primary">Registrarse</button>
+                <button type="reset" class="btn btn-outline-secondary" onclick="resetFormulario()">Limpiar</button>
+            </div>
+
+            <div id="success-msg" class="alert alert-success mt-3" style="display:none;">
+                ✓ ¡Registro completado con éxito!
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
